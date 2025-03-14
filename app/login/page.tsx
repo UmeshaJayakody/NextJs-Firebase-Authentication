@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth, firestore } from '@/database/firebase/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import Link from 'next/link';
@@ -46,18 +46,27 @@ const Login = () => {
             } else {
                 setError('Please verify your email address to continue.');
             }
-        } catch (error) {
-            if (error instanceof Error) {
-                setError(error.message);
-            } else {
-                setError('An unknown error occurred. Please try again later.');
-            }
+        } catch (error: any) {
+            console.error('Login error:', error);
+            setError(error.message || 'An unknown error occurred. Please try again later.');
         }
     };
 
     if (!isClient) {
         return null;
     }
+
+    const signInWithGoogle = async () => {
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+        try {
+            await signInWithPopup(auth, provider);
+            router.push('/dashboard');
+        } catch (error: any) {
+            console.error('Google sign-in error:', error);
+            setError(error.message || 'An unknown error occurred. Please try again later.');
+        }
+    };
 
     return (
         <div className="flex flex-col items-center justify-center w-full h-full">
@@ -83,6 +92,7 @@ const Login = () => {
                     Create an account
                 </Link>
             </form>
+            <button className="text-blue-500 mt-4" onClick={signInWithGoogle}>Sign in with Google</button>
         </div>
     );
 };
