@@ -68,6 +68,10 @@ const Login = () => {
         }
     };
 
+    const handleFogetPassword = () => {
+        router.push('/forget-password');
+    };
+
     return (
         <div className="flex flex-col items-center justify-center w-full h-full">
             <h2 className="text-3xl font-bold">Login</h2>
@@ -93,6 +97,7 @@ const Login = () => {
                 </Link>
             </form>
             <button className="text-blue-500 mt-4" onClick={signInWithGoogle}>Sign in with Google</button>
+            <button className="text-blue-500 mt-4" onClick={handleFogetPassword}>Foget password</button>
         </div>
     );
 };
