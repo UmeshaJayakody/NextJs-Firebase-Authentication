@@ -26,3 +26,13 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## App Functionalities
+
+- User Registration: Allows new users to create an account using email and password.
+
+- User Login: Enables existing users to log in securely with their credentials.
+
+- Forgot Password: Provides a way for users to reset their password via email if they forget it.
+
+- Google Login: Offers an option to log in using a Google account for quicker access and convenience.
